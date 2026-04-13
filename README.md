@@ -71,7 +71,6 @@ flowchart LR
 ## Project Structure
 
 ```text
-.github/workflows/
 config/
 data/
 docs/
@@ -81,6 +80,9 @@ outputs/
   powerbi/
   reports/
   tables/
+powerbi/
+  pbix/
+  screenshots/
 sql/
 src/vendor_performance/
 templates/
@@ -139,12 +141,25 @@ Run tests:
 
 ## Power BI Package
 
-The Power BI assets are bundled in [`vendor_powerbi`](./vendor_powerbi):
+The Power BI setup is split into two clear parts:
+
+### 1. Dashboard source assets
+
+These live in [`vendor_powerbi`](./vendor_powerbi) and are the reusable files used to build the dashboard:
 
 - [`vendor_powerbi/measures.dax`](./vendor_powerbi/measures.dax)
 - [`vendor_powerbi/theme_modern.json`](./vendor_powerbi/theme_modern.json)
 - [`vendor_powerbi/dashboard_spec.md`](./vendor_powerbi/dashboard_spec.md)
 - [`vendor_powerbi/dashboard_build_guide.md`](./vendor_powerbi/dashboard_build_guide.md)
+- [`vendor_powerbi/dashboard_background.svg`](./vendor_powerbi/dashboard_background.svg)
+
+### 2. GitHub-facing dashboard deliverables
+
+These live in [`powerbi`](./powerbi) and are meant for recruiter visibility:
+
+- `powerbi/pbix/`
+- `powerbi/screenshots/`
+- [`powerbi/README.md`](./powerbi/README.md)
 
 ## GitHub Dashboard Presentation
 
@@ -158,6 +173,11 @@ For recruiter visibility, keep the dashboard assets in a dedicated [`powerbi`](.
   - quick dashboard overview, screenshots, and optional Power BI Service link
 
 This makes the dashboard easy to understand even for recruiters who will never download a `.pbix` file.
+
+At the same time, keep the reusable Power BI build assets in [`vendor_powerbi`](./vendor_powerbi) so the repo clearly shows both:
+
+- how the dashboard was designed
+- how the final dashboard should be presented on GitHub
 
 ## Repo Pitch
 

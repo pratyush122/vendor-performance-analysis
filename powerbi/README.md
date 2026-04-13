@@ -2,6 +2,14 @@
 
 This folder is the GitHub-facing home for the final Power BI dashboard deliverables.
 
+The reusable build assets for this dashboard are stored separately in [`../vendor_powerbi`](../vendor_powerbi), including:
+
+- DAX measures
+- theme JSON
+- dashboard spec
+- build guide
+- background asset
+
 ## Recommended Structure
 
 ```text
@@ -59,3 +67,4 @@ If you publish the dashboard to Power BI Service, add this near the top:
 
 - The build inputs for this dashboard live in [`../vendor_powerbi`](../vendor_powerbi).
 - The dashboard-ready dataset is [`../outputs/powerbi/vendor_performance_dashboard_ready.csv`](../outputs/powerbi/vendor_performance_dashboard_ready.csv).
+- Keep this folder focused on final presentation assets, and keep `vendor_powerbi/` focused on source/build assets.
