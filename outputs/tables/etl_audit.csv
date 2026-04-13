@@ -1,0 +1,2 @@
+raw_purchases_rows,raw_sales_rows,raw_vendor_invoice_rows,mart_rows,distinct_vendors,distinct_brands,runtime_seconds
+2372474,12825363,5543,10692,126,10663,11.42

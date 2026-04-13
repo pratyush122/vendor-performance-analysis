@@ -1,0 +1,20 @@
+project_name: vendor-performance-analysis
+database_path: analytics.duckdb
+data_dir: data
+output_dir: outputs
+log_dir: logs
+memory_limit: 1GB
+threads: 4
+raw_files:
+  begin_inventory: begin_inventory.csv
+  end_inventory: end_inventory.csv
+  purchase_prices: purchase_prices.csv
+  purchases: purchases.csv
+  sales: sales.csv
+  vendor_invoice: vendor_invoice.csv
+analysis:
+  target_brand_sales_quantile: 0.15
+  target_brand_margin_quantile: 0.85
+  top_performer_sales_quantile: 0.75
+  low_performer_sales_quantile: 0.25
+  chart_top_n: 10

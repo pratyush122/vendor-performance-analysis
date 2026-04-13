@@ -1,0 +1,8 @@
+duckdb
+pandas
+matplotlib
+seaborn
+scipy
+numpy
+PyYAML
+Jinja2

@@ -1,0 +1,99 @@
+Total Sales Dollars = SUM('vendor_performance_dashboard_ready'[total_sales_dollars])
+
+Total Purchase Dollars = SUM('vendor_performance_dashboard_ready'[total_purchase_dollars])
+
+Gross Profit = SUM('vendor_performance_dashboard_ready'[gross_profit])
+
+Gross Profit After Freight = SUM('vendor_performance_dashboard_ready'[gross_profit_after_freight])
+
+Total Freight Cost = SUM('vendor_performance_dashboard_ready'[freight_cost])
+
+Average Profit Margin = AVERAGE('vendor_performance_dashboard_ready'[profit_margin]) / 100
+
+Net Profit Margin = AVERAGE('vendor_performance_dashboard_ready'[net_profit_margin]) / 100
+
+Unsold Inventory Value = SUM('vendor_performance_dashboard_ready'[unsold_inventory_value])
+
+Distinct Vendors = DISTINCTCOUNT('vendor_performance_dashboard_ready'[vendor_number])
+
+Distinct Brands = DISTINCTCOUNT('vendor_performance_dashboard_ready'[brand_id])
+
+Average Stock Turnover = AVERAGE('vendor_performance_dashboard_ready'[stock_turnover])
+
+Sales To Purchase Ratio = AVERAGE('vendor_performance_dashboard_ready'[sales_to_purchase_ratio])
+
+Purchase Contribution % =
+DIVIDE(
+    [Total Purchase Dollars],
+    CALCULATE(
+        [Total Purchase Dollars],
+        ALL('vendor_performance_dashboard_ready'[vendor_name])
+    )
+)
+
+Top 10 Purchase Contribution % =
+VAR TopVendorTable =
+    TOPN(
+        10,
+        SUMMARIZE(
+            ALL('vendor_performance_dashboard_ready'[vendor_name]),
+            'vendor_performance_dashboard_ready'[vendor_name],
+            "PurchaseAmt", CALCULATE([Total Purchase Dollars])
+        ),
+        [PurchaseAmt],
+        DESC
+    )
+RETURN
+DIVIDE(
+    SUMX(TopVendorTable, [PurchaseAmt]),
+    CALCULATE(
+        [Total Purchase Dollars],
+        ALL('vendor_performance_dashboard_ready'[vendor_name])
+    )
+)
+
+Vendor HHI =
+SUMX(
+    VALUES('vendor_performance_dashboard_ready'[vendor_name]),
+    VAR VendorShare =
+        DIVIDE(
+            CALCULATE([Total Purchase Dollars]),
+            CALCULATE(
+                [Total Purchase Dollars],
+                ALL('vendor_performance_dashboard_ready'[vendor_name])
+            )
+        )
+    RETURN VendorShare * VendorShare
+)
+
+Low Sales High Margin Brand Count =
+VAR BrandTable =
+    ADDCOLUMNS(
+        SUMMARIZE(
+            ALL('vendor_performance_dashboard_ready'[description]),
+            'vendor_performance_dashboard_ready'[description]
+        ),
+        "BrandSales", CALCULATE([Total Sales Dollars]),
+        "BrandMargin", CALCULATE(AVERAGE('vendor_performance_dashboard_ready'[profit_margin]))
+    )
+VAR SalesThreshold = PERCENTILEX.INC(BrandTable, [BrandSales], 0.15)
+VAR MarginThreshold = PERCENTILEX.INC(BrandTable, [BrandMargin], 0.85)
+RETURN
+COUNTROWS(
+    FILTER(
+        BrandTable,
+        [BrandSales] <= SalesThreshold
+            && [BrandMargin] >= MarginThreshold
+    )
+)
+
+Selected Vendor =
+SELECTEDVALUE('vendor_performance_dashboard_ready'[vendor_name], "All Vendors")
+
+Selected Brand =
+SELECTEDVALUE('vendor_performance_dashboard_ready'[description], "All Brands")
+
+KPI Subtitle =
+"Sales " & FORMAT([Total Sales Dollars], "$#,##0.00,,M")
+    & " | Profit " & FORMAT([Gross Profit After Freight], "$#,##0.00,,M")
+    & " | Net Margin " & FORMAT([Net Profit Margin], "0.00%")

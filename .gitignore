@@ -1,0 +1,15 @@
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.ipynb_checkpoints/
+*.ipynb
+logs/*.log
+outputs/temp_duckdb/
+*.duckdb.wal
+*.tmp
+*.bak
+data/*.csv
+analytics.duckdb
+inventory.db

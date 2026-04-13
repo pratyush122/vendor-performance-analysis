@@ -1,0 +1,45 @@
+# Vendor Performance Analysis
+
+Generated at: `{{ generated_at }}`
+
+## Business Goal
+
+Assess vendor performance across sales, profitability, purchasing efficiency, and inventory risk so the business can:
+
+- identify low-sales / high-margin brands that need pricing or promotion changes
+- understand which vendors drive most sales and procurement dependency
+- verify whether bulk buying reduces unit cost
+- flag slow-moving inventory and capital locked in unsold stock
+
+## KPI Snapshot
+
+- Total sales: `{{ "{:,.2f}".format(payload.kpis.total_sales_dollars) }}`
+- Total purchases: `{{ "{:,.2f}".format(payload.kpis.total_purchase_dollars) }}`
+- Gross profit: `{{ "{:,.2f}".format(payload.kpis.gross_profit) }}`
+- Average profit margin: `{{ "{:.2f}".format(payload.kpis.avg_profit_margin) }}%`
+- Unsold inventory value: `{{ "{:,.2f}".format(payload.kpis.unsold_inventory_value) }}`
+- Top-10 vendor purchase contribution: `{{ "{:.2f}".format(payload.top_10_purchase_contribution_pct) }}%`
+
+## Executive Findings
+
+1. `{{ payload.target_brand_count }}` brands sit in the low-sales / high-margin zone, making them strong candidates for pricing experiments, promotion, and distribution support.
+2. The highest selling vendor is `{{ payload.top_vendor }}` with `{{ payload.top_vendor_sales }}` in sales, while the strongest brand is `{{ payload.top_brand }}` at `{{ payload.top_brand_sales }}`.
+3. Vendor concentration is material: the top 10 vendors contribute `{{ "{:.2f}".format(payload.top_10_purchase_contribution_pct) }}%` of purchase dollars.
+4. The lowest observed inventory-turnover vendor in the bottom-10 slice is `{{ payload.lowest_turnover_vendor }}` with an average turnover of `{{ "{:.2f}".format(payload.lowest_turnover_value) }}`.
+5. Capital locked in unsold inventory is `{{ payload.unsold_inventory_total }}`.
+
+## Statistical Validation
+
+- Bulk purchasing vs unit cost Spearman correlation: `{{ payload.bulk_purchase_corr }}`
+- Bulk purchasing p-value: `{{ payload.bulk_purchase_p_value }}`
+- Top-vendor profit margin 95% CI: `{{ payload.profit_margin_top_ci[0] }}` to `{{ payload.profit_margin_top_ci[1] }}`
+- Low-vendor profit margin 95% CI: `{{ payload.profit_margin_low_ci[0] }}` to `{{ payload.profit_margin_low_ci[1] }}`
+- Profit margin difference p-value: `{{ payload.profit_margin_p_value }}`
+
+## Recommendations
+
+1. Prioritize the low-sales / high-margin brands for promotional campaigns and controlled price tests.
+2. Reduce vendor concentration risk by diversifying procurement away from the top concentration cluster where practical.
+3. Use bulk-purchase agreements selectively on brands with proven sell-through to capture lower unit cost without inflating unsold inventory.
+4. Review slow-moving vendors and brands for markdowns, bundle offers, or reduced replenishment cadence.
+5. Use the exported Power BI dataset and DAX measures to track these KPIs continuously.

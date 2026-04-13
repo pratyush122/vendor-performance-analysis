@@ -1,0 +1,2 @@
+comparison,top_mean,top_ci_lower,top_ci_upper,low_mean,low_ci_lower,low_ci_upper,ttest_statistic,ttest_p_value
+top_vs_low_vendor_profit_margin,38.921266450673194,38.41555599358979,39.4269769077566,33.14451571241541,30.061302615518784,36.22772880931204,3.6525037912426033,0.00035255056458513616

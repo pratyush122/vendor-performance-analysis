@@ -1,0 +1,16 @@
+{
+  "mart_rows": 10692,
+  "analysis_rows": 8564,
+  "distinct_vendors": 118,
+  "distinct_brands": 8544,
+  "total_sales_dollars": 441408069.4499992,
+  "total_purchase_dollars": 307338437.46999997,
+  "gross_profit": 134069631.97999927,
+  "avg_profit_margin": 38.7229871092855,
+  "unsold_inventory_value": 9553539.19,
+  "top_10_purchase_contribution_pct": 65.6896003936074,
+  "vendor_hhi": 0.06167412755036847,
+  "bulk_purchase_spearman_corr": -0.2901477645188315,
+  "bulk_purchase_spearman_p_value": 9.332257044537618e-166,
+  "profit_margin_ttest_p_value": 0.00035255056458513616
+}
