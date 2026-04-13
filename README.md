@@ -80,9 +80,6 @@ outputs/
   powerbi/
   reports/
   tables/
-powerbi/
-  pbix/
-  screenshots/
 sql/
 src/vendor_performance/
 templates/
@@ -141,11 +138,7 @@ Run tests:
 
 ## Power BI Package
 
-The Power BI setup is split into two clear parts:
-
-### 1. Dashboard source assets
-
-These live in [`vendor_powerbi`](./vendor_powerbi) and are the reusable files used to build the dashboard:
+The reusable Power BI build assets live in [`vendor_powerbi`](./vendor_powerbi):
 
 - [`vendor_powerbi/measures.dax`](./vendor_powerbi/measures.dax)
 - [`vendor_powerbi/theme_modern.json`](./vendor_powerbi/theme_modern.json)
@@ -153,31 +146,16 @@ These live in [`vendor_powerbi`](./vendor_powerbi) and are the reusable files us
 - [`vendor_powerbi/dashboard_build_guide.md`](./vendor_powerbi/dashboard_build_guide.md)
 - [`vendor_powerbi/dashboard_background.svg`](./vendor_powerbi/dashboard_background.svg)
 
-### 2. GitHub-facing dashboard deliverables
-
-These live in [`powerbi`](./powerbi) and are meant for recruiter visibility:
-
-- `powerbi/pbix/`
-- `powerbi/screenshots/`
-- [`powerbi/README.md`](./powerbi/README.md)
-
 ## GitHub Dashboard Presentation
 
-For recruiter visibility, keep the dashboard assets in a dedicated [`powerbi`](./powerbi) folder:
+At the current stage, the repo includes only the necessary Power BI assets:
 
-- `powerbi/pbix/`
-  - save your final `.pbix` or `.pbit` here once you finish it in Power BI Desktop
-- `powerbi/screenshots/`
-  - export one screenshot per dashboard page
-- [`powerbi/README.md`](./powerbi/README.md)
-  - quick dashboard overview, screenshots, and optional Power BI Service link
+- reusable dashboard build assets in [`vendor_powerbi`](./vendor_powerbi)
+- generated Power BI-ready datasets in [`outputs/powerbi`](./outputs/powerbi)
 
-This makes the dashboard easy to understand even for recruiters who will never download a `.pbix` file.
+Once you save the final `.pbix` and export screenshots, you can add a dedicated dashboard presentation folder for GitHub if you want.
 
-At the same time, keep the reusable Power BI build assets in [`vendor_powerbi`](./vendor_powerbi) so the repo clearly shows both:
-
-- how the dashboard was designed
-- how the final dashboard should be presented on GitHub
+For now, `vendor_powerbi/` is the single source of truth for dashboard design and build assets.
 
 ## Repo Pitch
 
